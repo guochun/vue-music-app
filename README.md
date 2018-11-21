@@ -1,29 +1,7 @@
-# vue-music-app
+# VUE 实现一款音乐app
 
-## Project setup
-```
-npm install
-```
+## 技术选型 
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+- 框架: Vue
+- JS: ecmascript6
+- css: stylus
