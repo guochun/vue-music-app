@@ -1,14 +1,18 @@
 <template>
   <div class="singer">
-    <list-view :data="singers"></list-view>
+    <list-view :data="singers" @select="OnSelectSinger"></list-view>
+    <router-view></router-view>
   </div>
 </template>
 
 <script type="text/ecmascipt-6">
+import { mapMutations } from 'vuex'
+
 import { getSingerList } from 'api/singer'
 import { ERR_OK } from 'api/config'
 import Singer from 'common/js/singer'
 import ListView from 'base/listView/listView'
+
 const HOT_TITLE = '热门歌手'
 const HOT_SINGER_LEN = 10
 
@@ -26,6 +30,12 @@ export default {
     this._getSingerList()
   },
   methods: {
+    OnSelectSinger (singer) {
+      this.$router.push({
+        path: `/singer/${singer.uid}`
+      })
+      this.setSinger(singer)
+    },
     _getSingerList () {
       getSingerList()
         .then((res) => {
@@ -77,7 +87,10 @@ export default {
         return a.title.charCodeAt() - b.title.charCodeAt()
       })
       return hot.concat(ret)
-    }
+    },
+    ...mapMutations({
+      setSinger: 'SET_SINGER'
+    })
   }
 }
 </script>

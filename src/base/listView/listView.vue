@@ -7,10 +7,10 @@
     :probeType="probeType"
   >
     <ul>
-      <li class="list-group"  v-for="(listGroup, index) of data" :key="index" ref="listGroup">
+      <li class="list-group"   v-for="(listGroup, index) of data" :key="index" ref="listGroup">
         <h2 class="list-group-title">{{listGroup.title}}</h2>
         <ul>
-          <li v-for="item in listGroup.item" :key="item.id" class="list-group-item">
+          <li v-for="item in listGroup.item" :key="item.id"  @click="OnSelectItem(item)" class="list-group-item">
             <img v-lazy="item.avatar" class="avatar">
             <span class="name">{{item.name}}</span>
           </li>
@@ -100,6 +100,9 @@ export default {
     Loading
   },
   methods: {
+    OnSelectItem (item) {
+      this.$emit('select', item)
+    },
     onShortcutTouchStart (e) {
       this.touch.anchorIndex = parseInt(getData(e.target, 'index'), 10)
       this.touch.lastY = e.touches[0].pageY

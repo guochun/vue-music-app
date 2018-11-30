@@ -19,3 +19,27 @@ export function getData (el, name, value) {
     return el.getAttribute(name)
   }
 }
+
+const elementStyle = document.createElement('div').style
+
+const vender = (function () {
+  const transformStyle = {
+    standard: 'transform',
+    webkit: 'webkitTransform',
+    Moz: 'MozTransform',
+    O: 'OTtransform',
+    ms: 'msTransform'
+  }
+  for (let key in transformStyle) {
+    if (transformStyle[key] in elementStyle) {
+      return key
+    }
+  }
+  return false
+})()
+
+export function prefixStyle (style) {
+  if (!vender) return false
+  if (vender === 'standard') return style
+  return vender + style.charAt(0).toUpperCase() + style.substr(1)
+}
